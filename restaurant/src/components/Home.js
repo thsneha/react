@@ -2,6 +2,8 @@ import React from 'react'
 import { Row,Col } from 'react-bootstrap'
 import {useState,useEffect } from 'react'
 import RestaurantCard from './RestaurantCard'
+import {listRestaurants} from '../actions/restaurantAction'
+import {useDispatch,useSelector} from 'react-redux'
 //This page is doing between Navigation page and footer page
 //synchronous fun is executing by line by line
 //Asynchronous fun is not to wait for execution(parallel execution) 
@@ -13,29 +15,41 @@ import RestaurantCard from './RestaurantCard'
    //2.pending.
    //3.reject.
 function Home() {
-  const [items,setItems]=useState([])
+  // const [items,setItems]=useState([])
 
-  const fetchData=async()=>{
-    await fetch('/restaurants.json')
-    .then((res)=>res.json())
-    //assigned the data into items in useState so setItems method is used
-    .then((data)=>setItems(data.restaurants))
-  }
+  // const fetchData=async()=>{
+  //   await fetch('/restaurants.json')
+  //   .then((res)=>res.json())
+  //   //assigned the data into items in useState so setItems method is used
+  //   .then((data)=>setItems(data.restaurants))
+  // }
+  const dispatch = useDispatch()
+  const result = useSelector(state=>state.restaurantReducer)
+  // destructuring
+  const {restaurant} = result
 //useEffect will automatically execute the home component is call from app.js
-  useEffect(()=>{
-       fetchData()
+  // useEffect(()=>{
+  //      fetchData()
+  // },[])
+  // console.log("items---",items)
+  useEffect(() =>{
+    dispatch(listRestaurants())
   },[])
-  console.log("items---",items)
-
   return (
     <Row>
-      {items.map((item)=>(
+      {/* {items.map((item)=>(
         <Col sm={12} md={8} lg={6} xl={3}>
         <RestaurantCard  data={item}/>
        </Col>
 
       )
-      )}
+      )} */}
+      {restaurant.map((item)=>(
+        <Col sm={12} md={8} lg={6} xl={3}>
+          <RestaurantCard data={item}/>
+        </Col>
+
+      ))}
       
     </Row>
   )

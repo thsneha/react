@@ -15,8 +15,10 @@ function RestaurantDetails() {
     }
     useEffect(
         ()=>{
+            // mounting
             fetchData()
         },[]
+        // []--updating in component
     )
     const details=datas.find((i)=>i.id==params.id)
 

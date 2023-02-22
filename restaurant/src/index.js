@@ -5,11 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './bootstrap.min.css'
 import {BrowserRouter as Router} from 'react-router-dom'
+import {Provider} from 'react-redux'
+// import store function from store file
+import store from './store'
+
+// provider makes an access of a store to entire project
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// store provide to entire app
 root.render(
   <React.StrictMode>
-    <Router><App/></Router>
+    <Router>
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    </Router>
 
   </React.StrictMode>
 );
