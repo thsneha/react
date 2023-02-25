@@ -1,14 +1,18 @@
 
 import './App.css';
+import Nav from './components/Nav'
+import Banner from './components/Banner'
 import Row from './components/Row'
 import requests from './request'
 // App.js is a parent component 
 function App() {
   return (
     <div className="App">
+      <Nav/>
+      <Banner/>
       <Row 
       title = "Netflix originals"
-      fetchUrl={requests.fetchNetflixOriginals}/>
+      fetchUrl={requests.fetchNetflixOriginals } isLargeRow={true}/>
       <Row 
       title = "Top rated"
       fetchUrl={requests.fetchTopRated}/>

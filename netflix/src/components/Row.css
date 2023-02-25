@@ -13,15 +13,18 @@
 }
 /* scrollbar in browser */
 .row__posters::-webkit-scrollbar{
-    display:none;
+    width:10px;
 }
 .row__poster{
     width:100%;
     /* images contained in the div */
     object-fit: contain;
-    max-height: 200px;
+    max-height: 150px;
     margin-right: 10px;
     transition: transform 450ms;
+}
+.row__posterLarge{
+    max-height:250px;
 }
 .row__poster:hover{
     transform:scale(1.08);

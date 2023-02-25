@@ -5,7 +5,7 @@ import './Row.css'
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 // asynchronous fnctons exection and the data to be given to a state automatically when the component to be rendering
-function Row({title,fetchUrl}) {
+function Row({title,fetchUrl,isLargeRow}) {
     // console.log("fetchurl---------",fetchUrl)
 
     const [movies,setMovies] = useState([])
@@ -26,10 +26,12 @@ function Row({title,fetchUrl}) {
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
+        {/* && is a truthy condition so elsepart is not needed */}
        {movies.map((movie)=>(
         <img key={movie.id}
-        className="row__poster"
-        src={`${base_url}${movie.poster_path}`}
+        className={`row__poster ${isLargeRow && 'row__posterLarge'}`}
+        src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+        //start from the second row the images thus changed to cover pic
         alt={movie.name}/>
 
        )
